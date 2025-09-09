@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-#include <memory>
-
 #include "State.h"
 
 // ゲーム管理クラス	
@@ -9,27 +6,26 @@ class GameManager {
 	// ステートのポインター
 	std::unique_ptr<GameState> currentState;
 	bool isRunning;
-	float gameTime;
+	int num;
 
 public:
 
-	GameManager() : isRunning(true), gameTime(0.0f) {}
+	GameManager() : isRunning(true), num(-1) {
+		Init();
+	};
+
+	void Init();
 
 	// ステートの変更関数
-	void ChangeState(std::unique_ptr<GameState> newState) {
-		if (currentState) {
-			currentState->OnExit(this);
-		}
-		currentState = std::move(newState);
-		currentState->OnEnter(this);
-	}
+	void ChangeState(std::unique_ptr<GameState> newState);
 
 	// 更新メソッド
-	void Update(float deltaTime) {
-		gameTime += deltaTime;
-		if (currentState) {
-			currentState->OnUpdate(this, deltaTime);
-		}
+	void Update(int num);
+
+	bool getIsRun() const { return isRunning; }
+
+	void Clear() {
+		std::system("cls");
 	}
 
 };

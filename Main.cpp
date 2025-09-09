@@ -1,12 +1,16 @@
-#include <iostream>
 #include "Manager.h"
-#include "State.h"
 
-float time;
-std::shared_ptr<GameManager> manager;
+int num;
+std::shared_ptr<GameManager> manager = std::make_shared<GameManager>();
 
 int main() {
 
-	manager->Update(time);
+
+	while (manager->getIsRun())
+	{
+		manager->Update(num);
+		std::cin >> num;
+		manager->Clear();
+	}
 
 }

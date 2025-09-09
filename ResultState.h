@@ -1,27 +1,24 @@
 #pragma once
-#include "State.h"
-#include "Title.h"
+#include "Manager.h"
 
 class ResultState : public GameState {
-	int num;
+
 public:
-	void OnEnter(GameManager* manager) {
+
+	void OnEnter(GameManager* manager)override {
 		std::cout << "リザルト画面" << std::endl;
 	}
 
-	void OnUpdate(GameManager* manager, float deltaTime) {
+	void OnUpdate(GameManager* manager, int num)override {
 
-		std::cin >> num;
-
-		if (num == 1) {
-			manager->ChangeState(std::make_unique<TitleState>());
-		}
-		else {
+		std::cout << "10を入力したら終了します" << std::endl;
+		if (num == 10) {
 			return;
 		}
+		
 	}
 
-	void OnExit(GameManager* manager) {
+	void OnExit(GameManager* manager) override {
 		std::cout << "リザルト画面を終了" << std::endl;
 	}
 	const std::string GetName() const { return "Result"; }
